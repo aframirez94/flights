@@ -23,16 +23,11 @@ class Event:
 
 def generate_valid_journeys(events, date, origin, destination):
     # Parse input date
-    print("generate_valid_journeys")
-    print(f"date = {date}, origin = {origin}, destination = {destination}")
     journeys = []
     for event in events:
         first_event = Event(event)
-        print(f"fligh_number = {first_event.flight_number}, dep_date = {first_event.dep_datetime.date()}, dep_city = {first_event.dep_city}, arr_city = {first_event.arr_city}")
-        
         # filter out by origin and date
         if first_event.dep_city != origin or first_event.dep_datetime.date() != date:
-            print('AAA')
             continue
 
         # now let's evaluate if the destination is the same so it is a direct flight
@@ -51,7 +46,6 @@ def generate_valid_journeys(events, date, origin, destination):
 
             # now lets look for an event that has the same destination
             if sec_event.arr_city != destination:
-                print('BBB')
                 continue
 
             # if the sec_event departure matches with the first event arrival and the others conditions, then append the event
@@ -65,7 +59,6 @@ def generate_valid_journeys(events, date, origin, destination):
                     "path": [first_event.get_dict(), sec_event.get_dict()]
                 }
             )
-        print("-" * 15)
             
     return journeys
 
